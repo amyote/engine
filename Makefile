@@ -20,11 +20,14 @@ BIN: $(OBJS) $(SPVS)
 $(OBJ)/%.o: $(SRC)/%.c $(HDRS) objectdirectory
 	$(CC) $(CFLAGS) -c $< -o $@
 
+$(RES)/%.spv: $(SHD)/shader.% resourcedirectory
+	$(SC) $< -o $@
+
 objectdirectory:
 	mkdir -p obj
 
-$(RES)/%.spv: $(SHD)/shader.%
-	$(SC) $< -o $@
+resourcedirectory:
+	mkdir -p res
 
 .PHONY: clean
 
